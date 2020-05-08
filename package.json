@@ -1,0 +1,16 @@
+{
+    "name": "proyectoprimerparcial",
+    "version": "1.0.0",
+    "description": "App lectura csv",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Grupo1",
+    "license": "ISC",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "csv-parser": "^2.3.2",
+        "yargs": "^15.3.1"
+    }
+}
