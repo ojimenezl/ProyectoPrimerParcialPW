@@ -2,6 +2,7 @@ const argv = require('./config/yargs').argv;
 const control = require('./controlador/control')
 const colors = require('colors');
 let comando = argv._[0];
+// bucle
 switch (comando) {
     case 'publicar':
 
