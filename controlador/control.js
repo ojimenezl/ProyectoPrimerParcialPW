@@ -1,7 +1,7 @@
 const fs = require('fs'); // filesystem
 const csv = require('csv-parser'); // Encargado de parsear
 let vector = [];
-
+let tareaPorHAcer = [];
 const guardar = (file, country, year, out) => {
     //let archivo = fs.readFileSync(file, "utf8");
     //vector = archivo.toString().split(/\r?\n/);
@@ -23,8 +23,17 @@ const guardar = (file, country, year, out) => {
             })
             console.log("Se ha terminado de leer el archivo");
         });
-    console.log(vector);
+    //console.log(vector);
+    cargarDB()
 
+    console.log(tareaPorHAcer[3][2]);
+}
+const cargarDB = () => {
+    try {
+        tareaPorHAcer = require('../modelo/data.json');
+    } catch (error) {
+        tareaPorHAcer = []
+    }
 
 }
 
