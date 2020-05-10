@@ -40,7 +40,7 @@ const guardar = (file, country, year, out) => {
 const topcinco = (year) => {
     let vec = []
     year = year % 1960 + 4;
-    console.log(year);
+    //console.log(year);
     //console.log(tareaPorHAcer);
     for (let i = 5; i < tareaPorHAcer.length; i++) {
         let temp = {
