@@ -14,7 +14,15 @@ const guardar = (file, country, year, out) => {
         .pipe(csv({
             cast: true
         }))
-        .on('data', row => vector.push(row)) // Pasarlo al parseador a través de una tubería
+        .on('data', row => {
+            for (let i = 4; i < 65; i++) {
+                if (row[i] == '' || row[i] == ' ' || row[i] == "") {
+                    row[i] = '0'
+                }
+            }
+            //console.log(row);
+            vector.push(row)
+        }) // Pasarlo al parseador a través de una tubería
         .on("end", () => { // Y al finalizar, terminar lo necesario
             //console.log(vector);
             let data = JSON.stringify(vector);
@@ -23,13 +31,28 @@ const guardar = (file, country, year, out) => {
                 })
                 //console.log("Se ha terminado de leer el archivo");
         });
-    //console.log(vector);
-    cargarDB()
 
-    //console.log(tareaPorHAcer[4][2]);
-    for (let i = 3; i < tareaPorHAcer.length; i++) {
-        console.log(tareaPorHAcer[i][1]);
+    cargarDB()
+        //console.log(tareaPorHAcer[20]);
+    topcinco(year = 2018)
+}
+
+const topcinco = (year) => {
+    let vec = []
+    year = year % 1960 + 4;
+    console.log(year);
+    //console.log(tareaPorHAcer);
+    for (let i = 5; i < tareaPorHAcer.length; i++) {
+        let temp = {
+            codigo: tareaPorHAcer[i][1],
+            valor: parseInt(tareaPorHAcer[i][year])
+        }
+        vec.push(temp);
     }
+
+    vec = vec.sort(function(a, b) { return b.valor - a.valor });
+    console.log(vec.splice(0, 5));
+    return vec.splice(0, 5)
 }
 const cargarDB = () => {
     try {
