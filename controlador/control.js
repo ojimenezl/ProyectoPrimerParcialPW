@@ -14,9 +14,7 @@ const guardar = (file, country, year, out) => {
         .pipe(csv({
             cast: true
         }))
-        .on('data', (row) => {
-
-        }) // Pasarlo al parseador a través de una tubería
+        .on('data', row => vector.push(row)) // Pasarlo al parseador a través de una tubería
         .on("end", () => { // Y al finalizar, terminar lo necesario
             //console.log(vector);
             let data = JSON.stringify(vector);
