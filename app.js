@@ -14,8 +14,4 @@ switch (comando) {
     default:
         console.log('Comando no reconocido');
 }
-<<<<<<< HEAD
 //linea de cometario para ver
-=======
-//santy
->>>>>>> 424eed9dddf8c284548347df59c2531d07b04dbd
