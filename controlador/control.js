@@ -19,14 +19,17 @@ const guardar = (file, country, year, out) => {
             //console.log(vector);
             let data = JSON.stringify(vector);
             fs.writeFileSync('modelo/data.json', data, (err) => {
-                if (err) throw new Error('No se pudo guarda la data', err);
-            })
-            console.log("Se ha terminado de leer el archivo");
+                    if (err) throw new Error('No se pudo guarda la data', err);
+                })
+                //console.log("Se ha terminado de leer el archivo");
         });
     //console.log(vector);
     cargarDB()
 
-    console.log(tareaPorHAcer[3][2]);
+    //console.log(tareaPorHAcer[4][2]);
+    for (let i = 3; i < tareaPorHAcer.length; i++) {
+        console.log(tareaPorHAcer[i][1]);
+    }
 }
 const cargarDB = () => {
     try {
