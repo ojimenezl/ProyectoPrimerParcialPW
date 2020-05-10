@@ -50,7 +50,7 @@ const topcinco = (year) => {
         vec.push(temp);
     }
 
-    vec = vec.sort(function(a, b) { return b.valor - a.valor });
+    vec = vec.sort((a, b) => { return b.valor - a.valor });
     console.log(vec.splice(0, 5));
     return vec.splice(0, 5)
 }
