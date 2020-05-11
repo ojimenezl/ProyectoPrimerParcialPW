@@ -9,6 +9,7 @@ const country = {
 }
 const year = {
     alias: 'y',
+    default: '2018',
     desc: 'Año'
 }
 const out = {
