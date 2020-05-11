@@ -63,7 +63,7 @@ const medxaño = (year) => {
     oper = acum / tam;
     console.log("-------Media por año--------".red);
 
-    console.log(`la media del ${year} es ${oper}`);
+    console.log(`la media del ${year} es ${parseInt(oper)}`);
 };
 //Nicolas Carrasco
 const topcinco = (year) => {
