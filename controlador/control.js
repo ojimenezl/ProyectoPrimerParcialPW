@@ -39,9 +39,10 @@ const guardar = (file, country, year, out) => {
 
     cargarDB();
     //console.log(tareaPorHAcer[20]);
-    media(country, year);
+
     topcinco(year);
     menores(country, year);
+    media(country, year);
 };
 //Wendy Juma
 const medxaño = (año) => {};
@@ -50,7 +51,7 @@ const topcinco = (year) => {
     let vec = [];
     year = (year % 1960) + 4;
     //console.log(year);
-    //console.log(tareaPorHAcer);
+    //console.log(tareaPorHAcer.length);
     for (let i = 5; i < tareaPorHAcer.length; i++) {
         let temp = {
             codigo: tareaPorHAcer[i][1],
