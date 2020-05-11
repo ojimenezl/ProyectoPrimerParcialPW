@@ -39,12 +39,32 @@ const guardar = (file, country, year, out) => {
 
     cargarDB();
     //console.log(tareaPorHAcer[20]);
+    medxaño(year);
     media(country, year);
     topcinco(year);
     menores(country, year);
 };
 //Wendy Juma
-const medxaño = (año) => {};
+const medxaño = (year) => {
+    cargarDB();
+
+    let acum = 0;
+
+    let tam = tareaPorHAcer.length - 4;
+
+    let vec = [];
+    year = (year % 1960) + 4;
+
+    for (let i = 4; i < tareaPorHAcer.length; i++) {
+        valor = parseInt(tareaPorHAcer[i][year]);
+        vec.push(valor);
+        acum += parseInt(valor);
+    }
+    oper = acum / tam;
+    console.log("-------Media por año--------".red);
+
+    console.log(`la media del ${year} es ${oper}`);
+};
 //Nicolas Carrasco
 const topcinco = (year) => {
     let vec = [];
