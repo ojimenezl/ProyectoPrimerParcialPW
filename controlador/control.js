@@ -19,7 +19,7 @@ const guardar = (file, country, year, out) => {
             })
         )
         .on("data", (row) => {
-            for (let i = 4; i < 65; i++) {
+            for (let i = 4; i < 61; i++) {
                 if (row[i] == "" || row[i] == " " || row[i] == "") {
                     row[i] = "0";
                 }
@@ -39,20 +39,43 @@ const guardar = (file, country, year, out) => {
 
     cargarDB();
     //console.log(tareaPorHAcer[20]);
-
     topcinco(year);
     menores(country, year);
     media(country, year);
+    medxaño(year);
 };
 //Wendy Juma
-const medxaño = (año) => {};
+const medxaño = (year) => {
+    //cargarDB();
+
+    let acum = 0;
+
+    let tam = tareaPorHAcer.length - 4;
+    //console.log(tareaPorHAcer.length);
+    console.log(tam);
+    let vec = [];
+    year = (year % 1960) + 4;
+
+    for (let i = 4; i < tareaPorHAcer.length; i++) {
+        valor = parseInt(tareaPorHAcer[i][year]);
+        //vec.push(valor);
+        //console.log(i);
+        //console.log(valor);
+        acum += parseInt(valor);
+    }
+    oper = acum / tam;
+    console.log("-------Media por año--------".red);
+
+    console.log(`la media del ${year} es ${parseInt(oper)}`);
+};
 //Nicolas Carrasco
 const topcinco = (year) => {
     let vec = [];
     year = (year % 1960) + 4;
     //console.log(year);
     //console.log(tareaPorHAcer.length);
-    for (let i = 5; i < tareaPorHAcer.length; i++) {
+    for (let i = 4; i < tareaPorHAcer.length; i++) {
+        //console.log(tareaPorHAcer[i][0]);
         let temp = {
             codigo: tareaPorHAcer[i][1],
             valor: parseInt(tareaPorHAcer[i][year]),
