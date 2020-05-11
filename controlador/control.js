@@ -109,7 +109,6 @@ const menores = (country, year) => {
             }
             jj = newArray.length
         }
-
     }
 }
 const cargarDB = () => {
