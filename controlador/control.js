@@ -34,7 +34,7 @@ const guardar = (file, country, year, out) => {
 
         cargarDB()
             //console.log(tareaPorHAcer[20]);
-            // topcinco(year = 2018)
+        topcinco(year = 2018)
         menores(country, year)
     }
     //Nicolas Carrasco
