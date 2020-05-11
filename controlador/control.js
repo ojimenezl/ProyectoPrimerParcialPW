@@ -1,3 +1,4 @@
+const colors = require('colors');
 const fs = require('fs'); // filesystem
 const csv = require('csv-parser'); // Encargado de parsear
 let vector = [];
@@ -34,8 +35,10 @@ const guardar = (file, country, year, out) => {
 
         cargarDB()
             //console.log(tareaPorHAcer[20]);
-        topcinco(year = 2018)
+        media(country, year)
+        topcinco(year)
         menores(country, year)
+
     }
     //Nicolas Carrasco
 const topcinco = (year) => {
@@ -111,13 +114,41 @@ const menores = (country, year) => {
         }
     }
 }
-const cargarDB = () => {
-    try {
-        tareaPorHAcer = require('../modelo/data.json');
-    } catch (error) {
-        tareaPorHAcer = []
-    }
 
+const cargarDB = () => {
+        try {
+            tareaPorHAcer = require('../modelo/data.json');
+        } catch (error) {
+            tareaPorHAcer = []
+        }
+
+    }
+    //Kevin Ramirez
+const media = (pais, anio) => {
+    cargarDB();
+    for (var i = 4; i < tareaPorHAcer.length; i++) {
+        if (tareaPorHAcer[i][1] === pais) {
+            break;
+        }
+    }
+    for (var j = 4; j < 65; j++) {
+        if (tareaPorHAcer[3][j] == anio) {
+            break;
+        }
+    }
+    let t = 0;
+    let media = 0
+    for (let h = 4; h < tareaPorHAcer.length; h++) {
+        media += Number(tareaPorHAcer[h][j]);
+        t += 1;
+    }
+    let mediaM = media / t;
+    //77771107626///313593175.9
+    if (Number(tareaPorHAcer[i][j]) > mediaM) {
+        console.log(`\nEl valor de las suscripciones del pais ${pais.green}:(${tareaPorHAcer[i][j].magenta}) es ${'Mayor'.blue} a la media mundial:(${mediaM.toString().magenta}) en el año ${anio.toString().cyan}`);
+    } else {
+        console.log(`\nEl valor de las suscripciones del pais ${pais.green}:(${tareaPorHAcer[i][j].magenta}) es ${'Menor'.blue} a la media mundial:(${mediaM.toString().magenta}) en el año ${anio.toString().cyan}`);
+    }
 }
 
 module.exports = {
