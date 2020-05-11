@@ -1,6 +1,6 @@
-const colors = require('colors');
-const fs = require('fs'); // filesystem
-const csv = require('csv-parser'); // Encargado de parsear
+const colors = require("colors");
+const fs = require("fs"); // filesystem
+const csv = require("csv-parser"); // Encargado de parsear
 let vector = [];
 let tareaPorHAcer = [];
 const guardar = (file, country, year, out) => {
@@ -39,12 +39,12 @@ const guardar = (file, country, year, out) => {
 
     cargarDB();
     //console.log(tareaPorHAcer[20]);
-    media(country, year)
-    topcinco(year)
-    menores(country, year)
-
-}
-
+    media(country, year);
+    topcinco(year);
+    menores(country, year);
+};
+//Wendy Juma
+const medxaño = (año) => {};
 //Nicolas Carrasco
 const topcinco = (year) => {
     let vec = [];
@@ -125,7 +125,7 @@ const menores = (country, year) => {
             jj = newArray.length;
         }
     }
-}
+};
 
 //Kevin Ramirez
 const media = (pais, anio) => {
@@ -141,7 +141,7 @@ const media = (pais, anio) => {
         }
     }
     let t = 0;
-    let media = 0
+    let media = 0;
     for (let h = 4; h < tareaPorHAcer.length; h++) {
         media += Number(tareaPorHAcer[h][j]);
         t += 1;
@@ -149,14 +149,23 @@ const media = (pais, anio) => {
     let mediaM = media / t;
     //77771107626///313593175.9
     if (Number(tareaPorHAcer[i][j]) > mediaM) {
-        console.log(`\nEl valor de las suscripciones del pais ${pais.green}:(${tareaPorHAcer[i][j].magenta}) es ${'Mayor'.blue} a la media mundial:(${mediaM.toString().magenta}) en el año ${anio.toString().cyan}`);
+        console.log(
+            `\nEl valor de las suscripciones del pais ${pais.green}:(${
+        tareaPorHAcer[i][j].magenta
+      }) es ${"Mayor".blue} a la media mundial:(${
+        mediaM.toString().magenta
+      }) en el año ${anio.toString().cyan}`
+        );
     } else {
-        console.log(`\nEl valor de las suscripciones del pais ${pais.green}:(${tareaPorHAcer[i][j].magenta}) es ${'Menor'.blue} a la media mundial:(${mediaM.toString().magenta}) en el año ${anio.toString().cyan}`);
+        console.log(
+            `\nEl valor de las suscripciones del pais ${pais.green}:(${
+        tareaPorHAcer[i][j].magenta
+      }) es ${"Menor".blue} a la media mundial:(${
+        mediaM.toString().magenta
+      }) en el año ${anio.toString().cyan}`
+        );
     }
-}
-
-
-//Wendy Juma
+};
 
 const cargarDB = () => {
     try {
