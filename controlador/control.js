@@ -41,6 +41,7 @@ const guardar = (file, country, year, out) => {
     //console.log(tareaPorHAcer[20]);
     topcinco(year);
     menores(country, year);
+    mayores(country, year);
     media(country, year);
     medxaño(year);
 };
@@ -90,14 +91,13 @@ const topcinco = (year) => {
     return vec.splice(0, 5);
 };
 //Oscar Jiménez
-
 const menores = (country, year) => {
-    cargarDB();
+    cargarDB()
     var sub = 0;
     var top = [];
     var colum = [];
-    var pais = "";
-    var consul = `${country} - ${year}`;
+    var resul = [];
+    var consul = `${country} - ${year}`
     var newArray = new Array();
     for (let i = 1; i < 65; i++) {
         if (tareaPorHAcer[3][i] === year.toString()) {
@@ -115,41 +115,113 @@ const menores = (country, year) => {
     console.log("");
     for (var cr = 0, jm = colum.length; cr < jm; cr++) {
         if (colum[cr]) {
-            newArray.push(colum[cr]);
+            newArray.push(colum[cr])
         }
+
     }
-    newArray.sort((ca, cb) => ca - cb);
+    newArray = newArray.sort((ca, cb) => ca - cb);
 
     console.log(`TOP | AÑO | PAISES | SUSCRIPCIONES`.green);
     for (var jj = 1; jj < newArray.length; jj++) {
+
         if (newArray[jj] === parseInt(sub)) {
             for (var p = 1; p <= 5; p++) {
-                top.push(newArray[jj - p]);
+                top.push(newArray[jj - p])
             }
             for (let i = 1; i < 65; i++) {
                 if (tareaPorHAcer[3][i] === year.toString()) {
                     for (let j = 0; j <= top.length; j++) {
+
                         for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
                             if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
-                                console.log(
-                                    j + 1,
-                                    " | ",
-                                    year,
-                                    " | ",
-                                    tareaPorHAcer[tv][1],
-                                    " | ",
-                                    top[j]
-                                );
+                                let numenor = {
+                                    year: year,
+                                    codigo: tareaPorHAcer[tv][1],
+                                    valor: top[j]
+                                }
+                                resul.push(numenor);
+                                console.log(j + 1, " | ", year, " | ", tareaPorHAcer[tv][1], " | ", top[j]);
+
                             }
                         }
                     }
                     i = 65;
                 }
             }
-            jj = newArray.length;
+            jj = newArray.length
+        }
+
+    }
+    //console.log(resul);
+}
+
+//Eduardo Quisupangui
+const mayores = (country, year) => {
+    cargarDB()
+    var sub = 0;
+    var top = [];
+    var colum = [];
+    var resul = [];
+    var consul = `${country} - ${year}`
+    var newArray = new Array();
+    for (let i = 1; i < 65; i++) {
+        if (tareaPorHAcer[3][i] === year.toString()) {
+            for (let j = 3; j < tareaPorHAcer.length; j++) {
+                //console.log(tareaPorHAcer[j][i]);
+                colum.push(parseInt(tareaPorHAcer[j][i]));
+                if (tareaPorHAcer[j][1] == country) {
+                    sub = tareaPorHAcer[j][i];
+                }
+            }
         }
     }
-};
+
+    console.log(`LOS 5 PAISES CON MAYORES SUSCRIPCIONES QUE ${country}`.green);
+    console.log(`SU CONSULTA:`.green);
+    console.log(`${consul} | ${sub}`.red);
+    console.log("");
+    for (var cr = 0, jm = colum.length; cr < jm; cr++) {
+        if (colum[cr]) {
+            //console.log(colum[cr]);
+            newArray.push(colum[cr])
+        }
+
+    }
+    newArray = newArray.sort((ca, cb) => ca - cb)
+
+    console.log(`TOP | AÑO | PAISES | SUSCRIPCIONES`.green);
+    for (var jj = 1; jj < newArray.length; jj++) {
+
+        if (newArray[jj] === parseInt(sub)) {
+            for (var p = 1; p <= 5; p++) {
+                top.push(newArray[jj + p])
+            }
+            for (let i = 1; i < 65; i++) {
+                if (tareaPorHAcer[3][i] === year.toString()) {
+                    for (let j = 0; j <= top.length; j++) {
+
+                        for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
+                            if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
+                                let numenor = {
+                                    year: year,
+                                    codigo: tareaPorHAcer[tv][1],
+                                    valor: top[j]
+                                }
+                                resul.push(numenor);
+                                console.log(j + 1, " | ", year, " | ", tareaPorHAcer[tv][1], " | ", top[j]);
+
+                            }
+                        }
+                    }
+                    i = 65;
+                }
+            }
+            jj = newArray.length
+        }
+
+    }
+    //console.log(resul);
+}
 
 //Kevin Ramirez
 const media = (pais, anio) => {
@@ -201,5 +273,3 @@ const cargarDB = () => {
 module.exports = {
     guardar,
 };
-
-//santiago lema
