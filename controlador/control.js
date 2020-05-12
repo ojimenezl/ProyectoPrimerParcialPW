@@ -19,8 +19,8 @@ const guardar = (file, country, year, out) => {
             })
         )
         .on("data", (row) => {
-            for (let i = 4; i < 61; i++) {
-                if (row[i] == "" || row[i] == " " || row[i] == "") {
+            for (let i = 4; i < 64; i++) {
+                if (row[i] == "" || row[i] == " " || row[i] == '') {
                     row[i] = "0";
                 }
             }
@@ -52,12 +52,11 @@ const medxaño = (year) => {
     let acum = 0;
 
     let tam = tareaPorHAcer.length - 4;
-    //console.log(tareaPorHAcer.length);
-    console.log(tam);
+
     let vec = [];
     year = (year % 1960) + 4;
 
-    for (let i = 4; i < tareaPorHAcer.length; i++) {
+    for (let i = 4; i < tam; i++) {
         valor = parseInt(tareaPorHAcer[i][year]);
         //vec.push(valor);
         //console.log(i);
