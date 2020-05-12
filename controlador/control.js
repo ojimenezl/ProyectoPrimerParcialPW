@@ -56,7 +56,7 @@ const medxaño = (year) => {
     let vec = [];
     year = (year % 1960) + 4;
 
-    for (let i = 4; i < tam; i++) {
+    for (let i = 4; i < tareaPorHAcer.length; i++) {
         valor = parseInt(tareaPorHAcer[i][year]);
         //vec.push(valor);
         //console.log(i);
@@ -66,7 +66,7 @@ const medxaño = (year) => {
     oper = acum / tam;
     console.log("-------Media por año--------".red);
 
-    console.log(`la media del ${year} es ${parseInt(oper)}`);
+    console.log(`la media del ${tareaPorHAcer[3][year]} es ${parseInt(oper)}`);
 };
 //Nicolas Carrasco
 const topcinco = (year) => {
