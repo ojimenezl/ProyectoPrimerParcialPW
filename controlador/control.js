@@ -22,15 +22,17 @@ const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
 
-    medxanio(year);
-    media(country, year);
-    mayores(country, year);
-    menores(country, year);
     let top = {
         top5: topcinco(year),
     };
     vect.push(top);
-    console.log(topcinco(year));
+    medxanio(year);
+    media(country, year);
+    mayores(country, year);
+    menores(country, year);
+
+
+    //console.log(topcinco(year));
     // srv.escribir(topcinco(year));
     escribirjson();
 };
@@ -61,9 +63,8 @@ const medxanio = (year) => {
         },
     };
     vect.push(datos);
-    //escribirjson();
-    console.log("-------Media por año--------".red);
-    console.log(`la media del ${tareaPorHAcer[3][year]} es ${parseInt(oper)}`);
+    console.log("\n-------MEDIA POR AÑO--------".red);
+    console.log(`LA MEDIA DEL ${tareaPorHAcer[3][year]} ES ${parseInt(oper)}`.yellow);
 };
 //Nicolas Carrasco
 const topcinco = (year) => {
@@ -78,8 +79,13 @@ const topcinco = (year) => {
     }
 
     vec = vec.sort((a, b) => b.valor - a.valor);
-    //
-    return vec.splice(0, 5);
+    console.log(`\nTOP DE LOS 5 PAISES POR AÑO ${tareaPorHAcer[3][year]}`.red);
+    console.log('CODIGO\t|\tVALOR'.green);
+    vec = vec.splice(0, 5);
+    for (let i of vec) {
+        console.log(`${i.codigo}\t|\t${i.valor}`.yellow);
+    }
+    return vec;
 };
 //Oscar Jiménez
 const menores = (country, year) => {
@@ -100,7 +106,7 @@ const menores = (country, year) => {
             }
         }
     }
-    console.log(`LOS 5 PAISES CON MENORES SUSCRIPCIONES QUE ${country}`.green);
+    console.log(`\nLOS 5 PAISES CON MENORES SUSCRIPCIONES QUE ${country}`.green);
     console.log(`SU CONSULTA:`.green);
     console.log(`${consul} | ${sub}`.red);
     console.log("");
@@ -175,7 +181,7 @@ const mayores = (country, year) => {
         }
     }
 
-    console.log(`LOS 5 PAISES CON MAYORES SUSCRIPCIONES QUE ${country}`.green);
+    console.log(`\nLOS 5 PAISES CON MAYORES SUSCRIPCIONES QUE ${country}`.green);
     console.log(`SU CONSULTA:`.green);
     console.log(`${consul} | ${sub}`.red);
     console.log("");
