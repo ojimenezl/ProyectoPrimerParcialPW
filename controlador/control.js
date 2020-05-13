@@ -21,7 +21,6 @@ const publicar = (file, country, year) => {
 const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
-
     let top = {
         top5: topcinco(year),
     };
@@ -30,16 +29,12 @@ const guardar = (file, country, year, out) => {
     media(country, year);
     mayores(country, year);
     menores(country, year);
-
-
-    //console.log(topcinco(year));
-    // srv.escribir(topcinco(year));
-    escribirjson();
+    escribirjson(out)
 };
 
-const escribirjson = () => {
+const escribirjson = (out) => {
     let data = JSON.stringify(vect);
-    fs.writeFile(`modelo/reporte.json`, data, (err) => {
+    fs.writeFile(`./modelo/${out}.json`, data, (err) => {
         if (err) throw new Error("No se pudo grabar", err);
     });
 };
