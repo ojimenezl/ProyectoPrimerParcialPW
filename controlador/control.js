@@ -10,11 +10,14 @@ const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
 
-    medxaño(year);
+    let top = {
+        top5: topcinco(year),
+    };
+    vect.push(top);
+    medxanio(year);
     media(country, year);
     mayores(country, year);
     menores(country, year);
-    topcinco(year);
 };
 
 //guardar en json
