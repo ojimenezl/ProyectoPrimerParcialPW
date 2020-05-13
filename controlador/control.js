@@ -9,30 +9,28 @@ let vect = [];
 const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
+    let todo = [];
+    todo.push(medxanio(year));
+    todo.push(media(country, year));
+    todo.push(mayores(country, year));
+    todo.push(menores(country, year));
+    todo.push(topcinco(year));
+    srv.escribir(todo);
 
-    let top = {
-        top5: topcinco(year),
-    };
-    vect.push(top);
-    medxanio(year);
-    media(country, year);
-    mayores(country, year);
-    menores(country, year);
 };
-
 //guardar en json
 const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
     let top = {
+        MediaxAño: medxanio(year),
+        Menor_Mayor: media(country, year),
+        Menores: menores(country, year),
+        Mayores: mayores(country, year),
         top5: topcinco(year),
     };
     vect.push(top);
-    medxanio(year);
-    media(country, year);
-    mayores(country, year);
-    menores(country, year);
-    escribirjson(out)
+    escribirjson(out);
 };
 
 const escribirjson = (out) => {
@@ -45,7 +43,7 @@ const escribirjson = (out) => {
 const medxanio = (year) => {
     let acum = 0;
     let tam = tareaPorHAcer.length - 4;
-
+    vec = []
     year = (year % 1960) + 4;
     for (let i = 4; i < tareaPorHAcer.length; i++) {
         valor = parseInt(tareaPorHAcer[i][year]);
@@ -55,14 +53,13 @@ const medxanio = (year) => {
     oper = acum / tam;
 
     let datos = {
-        MediaxAño: {
-            anio: tareaPorHAcer[3][year],
-            media: parseInt(oper),
-        },
+        anio: tareaPorHAcer[3][year],
+        media: parseInt(oper)
     };
-    vect.push(datos);
+    vec.push(datos);
     console.log("\n-------MEDIA POR AÑO--------".red);
     console.log(`LA MEDIA DEL ${tareaPorHAcer[3][year]} ES ${parseInt(oper)}`.yellow);
+    return vec;
 };
 //Nicolas Carrasco
 const topcinco = (year) => {
@@ -152,10 +149,7 @@ const menores = (country, year) => {
         }
     }
     //console.log(resul);
-    let dato = {
-        Menores: resul,
-    };
-    vect.push(dato);
+    return resul;
 };
 
 //Eduardo Quisupangui
@@ -228,10 +222,7 @@ const mayores = (country, year) => {
         }
     }
     //console.log(resul);
-    let dato = {
-        Mayores: resul,
-    };
-    vect.push(dato);
+    return resul;
 };
 
 //Kevin Ramirez
@@ -254,8 +245,8 @@ const media = (pais, anio) => {
         t += 1;
     }
     let mediaM = media / t;
-
-    //77771107626///313593175.9
+    let vec = []
+        //77771107626///313593175.9
     let men = "";
     if (Number(tareaPorHAcer[i][j]) > mediaM) {
         console.log(
@@ -278,13 +269,12 @@ const media = (pais, anio) => {
     }
 
     let datos = {
-        Mayor_Menor: {
-            pais: pais,
-            medpais: Number(tareaPorHAcer[i][j]),
-            estado: men,
-        },
+        pais: pais,
+        medpais: Number(tareaPorHAcer[i][j]),
+        estado: men
     };
-    vect.push(datos);
+    vec.push(datos);
+    return vec;
 };
 
 const lecturacsv = (file) => {

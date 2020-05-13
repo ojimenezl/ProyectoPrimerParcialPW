@@ -7,12 +7,17 @@ const escribir = (vector) => {
     const server = http.createServer((req, res) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
-        //console.log(vector);
+
         let template = '';
-        for (let i of vector) {
-            template += `<h2>Codigo:<label>${i.codigo}</label></h2>  <h2>Valor:<label>${i.valor}</label></h2> `
+        console.log("Pr", vector[0][0].anio);
+        template += vector[0][0].anio;
+        /*
+        for (let i o) {
+            //template += `<h2>Codigo:<label>${i.codigo}</label></h2>  <h2>Valor:<label>${i.valor}</label></h2> `
+            //console.log(vector[i]);
         }
-        template += `<a href="#">Hola mundo</a>`
+        */
+        //template += `<a href="#">Hola mundo</a>`
         res.write(template)
         res.end('');
     }).listen(port, hostname, () => {
