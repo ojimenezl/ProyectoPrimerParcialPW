@@ -6,17 +6,23 @@ const port = 3000;
 const escribir = (vector) => {
     const server = http.createServer((req, res) => {
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html');
-
+        res.setHeader('Content-Type', 'text/html;charset=utf-8');
+        let titulos = ["La media de suscripciones de todos los países en el año especificado.", "Establecer si el valor de las suscripciones del país determinado, es mayor o menor a la media mundial.", "Los cinco países por encima del valor de suscripciones del país determinado.", "Los cinco países por debajo del valor de suscripciones del país determinado.", "El top cinco de países para el año especificado."];
         let template = '';
-        console.log("Pr", vector[0][0].anio);
-        template += vector[0][0].anio;
-        /*
-        for (let i o) {
-            //template += `<h2>Codigo:<label>${i.codigo}</label></h2>  <h2>Valor:<label>${i.valor}</label></h2> `
-            //console.log(vector[i]);
+
+        template += `<label>${titulos[0]}</label></br>`;
+        template += `<label>Año: ${vector[0][0].anio} Media: ${vector[0][0].media}</label></br>`;
+
+        template += `<label>${titulos[1]}</label></br>`;
+        template += `<label>Pais: ${vector[1][0].pais} Media Pais: ${vector[1][0].medpais} Estado: ${vector[1][0].estado}</label></br>`;
+
+        for (let i = 2; i < vector.length; i++) {
+            template += `<label>${titulos[i]}</label></br>`;
+            for (let j = 0; j < vector.length; j++) {
+                template += `</label>Codigo: ${vector[i][j].codigo} Valor: ${vector[i][j].valor}</label></br>`;
+            }
         }
-        */
+
         //template += `<a href="#">Hola mundo</a>`
         res.write(template)
         res.end('');
