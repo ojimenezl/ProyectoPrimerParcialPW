@@ -4,38 +4,45 @@ const csv = require("csv-parser"); // Encargado de parsear
 const srv = require("./servidor.js");
 let vector = [];
 let tareaPorHAcer = [];
-
+let vect = [];
 //publicar en la web
 const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
 
-    topcinco(year);
-    menores(country, year);
+    //medxaño(year);
+    // media(country, year);
     mayores(country, year);
-    media(country, year);
-    medxaño(year);
-}
+    menores(country, year);
+    //topcinco(year);
+};
 
 //guardar en json
 const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
 
-    //topcinco(year);
-    menores(country, year);
-    mayores(country, year);
+    medxanio(year);
     media(country, year);
-    medxaño(year);
-    srv.escribir(topcinco(year));
+    mayores(country, year);
+    menores(country, year);
+    topcinco(year);
+
+    // srv.escribir(topcinco(year));
+    escribirjson();
 };
 
-
+const escribirjson = () => {
+    let data = JSON.stringify(vect);
+    fs.writeFile(`modelo/reporte.json`, data, (err) => {
+        if (err) throw new Error("No se pudo grabar", err);
+    });
+};
 //Wendy Juma
-const medxaño = (year) => {
+const medxanio = (year) => {
     let acum = 0;
     let tam = tareaPorHAcer.length - 4;
-    let vec = [];
+
     year = (year % 1960) + 4;
     for (let i = 4; i < tareaPorHAcer.length; i++) {
         valor = parseInt(tareaPorHAcer[i][year]);
@@ -43,6 +50,14 @@ const medxaño = (year) => {
         acum += parseInt(valor);
     }
     oper = acum / tam;
+
+    let datos = {
+        anio: tareaPorHAcer[3][year],
+        media: parseInt(oper),
+    };
+    vect.push("La media por cada año");
+    vect.push(datos);
+    //escribirjson();
     console.log("-------Media por año--------".red);
     console.log(`la media del ${tareaPorHAcer[3][year]} es ${parseInt(oper)}`);
 };
@@ -57,8 +72,12 @@ const topcinco = (year) => {
         };
         vec.push(temp);
     }
+
     vec = vec.sort((a, b) => b.valor - a.valor);
-    //console.log(vec.splice(0, 5));
+
+    vect.push(vec.splice(0, 5));
+    // escribirjson();
+    console.log(vec.splice(0, 5));
     return vec.splice(0, 5);
 };
 //Oscar Jiménez
@@ -68,7 +87,7 @@ const menores = (country, year) => {
     var top = [];
     var colum = [];
     var resul = [];
-    var consul = `${country} - ${year}`
+    var consul = `${country} - ${year}`;
     var newArray = new Array();
     for (let i = 1; i < 65; i++) {
         if (tareaPorHAcer[3][i] === year.toString()) {
@@ -86,45 +105,49 @@ const menores = (country, year) => {
     console.log("");
     for (var cr = 0, jm = colum.length; cr < jm; cr++) {
         if (colum[cr]) {
-            newArray.push(colum[cr])
+            newArray.push(colum[cr]);
         }
-
     }
     newArray = newArray.sort((ca, cb) => ca - cb);
 
     console.log(`TOP | AÑO | PAISES | SUSCRIPCIONES`.green);
     for (var jj = 1; jj < newArray.length; jj++) {
-
         if (newArray[jj] === parseInt(sub)) {
             for (var p = 1; p <= 5; p++) {
-                top.push(newArray[jj - p])
+                top.push(newArray[jj - p]);
             }
             for (let i = 1; i < 65; i++) {
                 if (tareaPorHAcer[3][i] === year.toString()) {
                     for (let j = 0; j <= top.length; j++) {
-
                         for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
                             if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
                                 let numenor = {
                                     year: year,
                                     codigo: tareaPorHAcer[tv][1],
-                                    valor: top[j]
-                                }
+                                    valor: top[j],
+                                };
                                 resul.push(numenor);
-                                console.log(j + 1, " | ", year, " | ", tareaPorHAcer[tv][1], " | ", top[j]);
-
+                                vect.push(numenor);
+                                console.log(
+                                    j + 1,
+                                    " | ",
+                                    year,
+                                    " | ",
+                                    tareaPorHAcer[tv][1],
+                                    " | ",
+                                    top[j]
+                                );
                             }
                         }
                     }
                     i = 65;
                 }
             }
-            jj = newArray.length
+            jj = newArray.length;
         }
-
     }
     //console.log(resul);
-}
+};
 
 //Eduardo Quisupangui
 const mayores = (country, year) => {
@@ -133,7 +156,7 @@ const mayores = (country, year) => {
     var top = [];
     var colum = [];
     var resul = [];
-    var consul = `${country} - ${year}`
+    var consul = `${country} - ${year}`;
     var newArray = new Array();
     for (let i = 1; i < 65; i++) {
         if (tareaPorHAcer[3][i] === year.toString()) {
@@ -154,45 +177,49 @@ const mayores = (country, year) => {
     for (var cr = 0, jm = colum.length; cr < jm; cr++) {
         if (colum[cr]) {
             //console.log(colum[cr]);
-            newArray.push(colum[cr])
+            newArray.push(colum[cr]);
         }
-
     }
-    newArray = newArray.sort((ca, cb) => ca - cb)
+    newArray = newArray.sort((ca, cb) => ca - cb);
 
     console.log(`TOP | AÑO | PAISES | SUSCRIPCIONES`.green);
     for (var jj = 1; jj < newArray.length; jj++) {
-
         if (newArray[jj] === parseInt(sub)) {
             for (var p = 1; p <= 5; p++) {
-                top.push(newArray[jj + p])
+                top.push(newArray[jj + p]);
             }
             for (let i = 1; i < 65; i++) {
                 if (tareaPorHAcer[3][i] === year.toString()) {
                     for (let j = 0; j <= top.length; j++) {
-
                         for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
                             if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
                                 let numenor = {
                                     year: year,
                                     codigo: tareaPorHAcer[tv][1],
-                                    valor: top[j]
-                                }
+                                    valor: top[j],
+                                };
                                 resul.push(numenor);
-                                console.log(j + 1, " | ", year, " | ", tareaPorHAcer[tv][1], " | ", top[j]);
-
+                                vect.push(numenor);
+                                console.log(
+                                    j + 1,
+                                    " | ",
+                                    year,
+                                    " | ",
+                                    tareaPorHAcer[tv][1],
+                                    " | ",
+                                    top[j]
+                                );
                             }
                         }
                     }
                     i = 65;
                 }
             }
-            jj = newArray.length
+            jj = newArray.length;
         }
-
     }
     //console.log(resul);
-}
+};
 
 //Kevin Ramirez
 const media = (pais, anio) => {
@@ -214,7 +241,9 @@ const media = (pais, anio) => {
         t += 1;
     }
     let mediaM = media / t;
+
     //77771107626///313593175.9
+    let men = "";
     if (Number(tareaPorHAcer[i][j]) > mediaM) {
         console.log(
             `\nEl valor de las suscripciones del pais ${pais.green}:(${
@@ -223,6 +252,7 @@ const media = (pais, anio) => {
         mediaM.toString().magenta
       }) en el año ${anio.toString().cyan}`
         );
+        men += "Mayor a la media mundial";
     } else {
         console.log(
             `\nEl valor de las suscripciones del pais ${pais.green}:(${
@@ -231,16 +261,24 @@ const media = (pais, anio) => {
         mediaM.toString().magenta
       }) en el año ${anio.toString().cyan}`
         );
+        men += "Menor a la media mundial";
     }
+
+    let datos = {
+        pais: pais,
+        medpais: Number(tareaPorHAcer[i][j]),
+        estado: men,
+    };
+    vect.push(datos);
 };
 
 const lecturacsv = (file) => {
     fs.createReadStream(file)
         .on("error", (err) => console.log(err)) // Abrir archivo
-        .pipe(csv({ cast: true, }))
+        .pipe(csv({ cast: true }))
         .on("data", (row) => {
             for (let i = 4; i < 64; i++) {
-                if (row[i] == "" || row[i] == " " || row[i] == '') {
+                if (row[i] == "" || row[i] == " " || row[i] == "") {
                     row[i] = "0";
                 }
             }
@@ -255,7 +293,7 @@ const lecturacsv = (file) => {
             });
             //console.log("Se ha terminado de leer el archivo");
         });
-}
+};
 
 const cargarDB = () => {
     try {
@@ -266,5 +304,5 @@ const cargarDB = () => {
 };
 module.exports = {
     guardar,
-    publicar
+    publicar,
 };
