@@ -10,11 +10,11 @@ const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
 
-    //medxaño(year);
-    // media(country, year);
+    medxaño(year);
+    media(country, year);
     mayores(country, year);
     menores(country, year);
-    //topcinco(year);
+    topcinco(year);
 };
 
 //guardar en json
@@ -26,8 +26,11 @@ const guardar = (file, country, year, out) => {
     media(country, year);
     mayores(country, year);
     menores(country, year);
-    topcinco(year);
-
+    let top = {
+        top5: topcinco(year),
+    };
+    vect.push(top);
+    console.log(topcinco(year));
     // srv.escribir(topcinco(year));
     escribirjson();
 };
@@ -52,10 +55,11 @@ const medxanio = (year) => {
     oper = acum / tam;
 
     let datos = {
-        anio: tareaPorHAcer[3][year],
-        media: parseInt(oper),
+        MediaxAño: {
+            anio: tareaPorHAcer[3][year],
+            media: parseInt(oper),
+        },
     };
-    vect.push("La media por cada año");
     vect.push(datos);
     //escribirjson();
     console.log("-------Media por año--------".red);
@@ -74,10 +78,7 @@ const topcinco = (year) => {
     }
 
     vec = vec.sort((a, b) => b.valor - a.valor);
-
-    vect.push(vec.splice(0, 5));
-    // escribirjson();
-    console.log(vec.splice(0, 5));
+    //
     return vec.splice(0, 5);
 };
 //Oscar Jiménez
@@ -122,12 +123,12 @@ const menores = (country, year) => {
                         for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
                             if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
                                 let numenor = {
-                                    year: year,
+                                    //                              year: year,
                                     codigo: tareaPorHAcer[tv][1],
                                     valor: top[j],
                                 };
                                 resul.push(numenor);
-                                vect.push(numenor);
+
                                 console.log(
                                     j + 1,
                                     " | ",
@@ -147,6 +148,10 @@ const menores = (country, year) => {
         }
     }
     //console.log(resul);
+    let dato = {
+        Menores: resul,
+    };
+    vect.push(dato);
 };
 
 //Eduardo Quisupangui
@@ -194,12 +199,12 @@ const mayores = (country, year) => {
                         for (var tv = 3; tv < tareaPorHAcer.length; tv++) {
                             if (top[j] === parseInt(tareaPorHAcer[tv][i])) {
                                 let numenor = {
-                                    year: year,
+                                    //year: year,
                                     codigo: tareaPorHAcer[tv][1],
                                     valor: top[j],
                                 };
                                 resul.push(numenor);
-                                vect.push(numenor);
+
                                 console.log(
                                     j + 1,
                                     " | ",
@@ -219,6 +224,10 @@ const mayores = (country, year) => {
         }
     }
     //console.log(resul);
+    let dato = {
+        Mayores: resul,
+    };
+    vect.push(dato);
 };
 
 //Kevin Ramirez
@@ -265,9 +274,11 @@ const media = (pais, anio) => {
     }
 
     let datos = {
-        pais: pais,
-        medpais: Number(tareaPorHAcer[i][j]),
-        estado: men,
+        Mayor_Menor: {
+            pais: pais,
+            medpais: Number(tareaPorHAcer[i][j]),
+            estado: men,
+        },
     };
     vect.push(datos);
 };
