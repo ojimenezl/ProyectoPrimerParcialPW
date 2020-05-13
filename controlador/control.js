@@ -21,23 +21,25 @@ const publicar = (file, country, year) => {
 const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
-
+    //Metodos
     medxanio(year);
     media(country, year);
     mayores(country, year);
     menores(country, year);
+    //Llamada al json
     let top = {
         top5: topcinco(year),
     };
     vect.push(top);
     console.log(topcinco(year));
+    escribirjson(out);
+    //Servidor
     // srv.escribir(topcinco(year));
-    escribirjson();
 };
 
-const escribirjson = () => {
+const escribirjson = (out) => {
     let data = JSON.stringify(vect);
-    fs.writeFile(`modelo/reporte.json`, data, (err) => {
+    fs.writeFile(`modelo/${out}.json`, data, (err) => {
         if (err) throw new Error("No se pudo grabar", err);
     });
 };
