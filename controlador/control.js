@@ -1,6 +1,7 @@
 const colors = require("colors");
 const fs = require("fs"); // filesystem
 const csv = require("csv-parser"); // Encargado de parsear
+const srv = require("./servidor.js");
 let vector = [];
 let tareaPorHAcer = [];
 
@@ -21,11 +22,12 @@ const guardar = (file, country, year, out) => {
     lecturacsv(file);
     cargarDB();
 
-    topcinco(year);
+    //topcinco(year);
     menores(country, year);
     mayores(country, year);
     media(country, year);
     medxaño(year);
+    srv.escribir(topcinco(year));
 };
 
 
@@ -56,7 +58,7 @@ const topcinco = (year) => {
         vec.push(temp);
     }
     vec = vec.sort((a, b) => b.valor - a.valor);
-    console.log(vec.splice(0, 5));
+    //console.log(vec.splice(0, 5));
     return vec.splice(0, 5);
 };
 //Oscar Jiménez
