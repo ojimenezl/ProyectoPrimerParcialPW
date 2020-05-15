@@ -1,7 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const methodOverride = require('method-override');
+//const methodOverride = require('method-override');
 
 const app = express();
 const hostname = '127.0.0.1';
@@ -24,7 +24,7 @@ const escribir = (vector) => {
 
     //app.use(express.static(path.join(__dirname, 'public')))
     app.listen(app.get('port'), () => {
-        console.log("server on port: ", app.get('port'));
+        console.log(`server on port:  http://localhost:${app.get('port')}`);
     });
 }
 module.exports = {
