@@ -40,6 +40,7 @@ let getR = async(file) => {
 }
 const cargarDB = () => {
     try {
+
         tareaPorHAcer = require("../modelo/data.json");
     } catch (error) {
         tareaPorHAcer = [];
@@ -57,11 +58,11 @@ const publicar = (file, country, year) => {
     todo.push(menores(country, year));
     todo.push(topcinco(year));
     let top = {
-        MediaxAnio: medxanio(year),
-        Menor_Mayor: media(country, year),
-        Menores: menores(country, year),
-        Mayores: mayores(country, year),
-        top5: topcinco(year),
+        MediaxAnio: medxanio(year).then(men => vec.push(men)).catch(err => err),
+        Menor_Mayor: media(country, year).then(men => men).catch(err => err),
+        Menores: menores(country, year).then(men => men).catch(err => err),
+        Mayores: mayores(country, year).then(men => men).catch(err => err),
+        top5: topcinco(year).then(men => men).catch(err => err)
     };
     srv.escribir(top);
     //srv.escribir(todo);
@@ -78,19 +79,20 @@ const guardar = async(file, country, year, out) => {
 
     cargarDB();
     let top = {
-        MediaxAnio: medxanio(year).then(men => vec.push(men)).catch(err => err),
-        Menor_Mayor: media(country, year).then(men => men).catch(err => err),
-        Menores: menores(country, year).then(men => men).catch(err => err),
-        Mayores: mayores(country, year).then(men => men).catch(err => err),
-        top5: topcinco(year).then(men => men).catch(err => err)
+        MediaxAnio: await medxanio(year),
+        Menor_Mayor: await media(country, year),
+        Menores: await menores(country, year),
+        Mayores: await mayores(country, year),
+        top5: await topcinco(year)
     };
     vect.push(top);
+    // console.log(top);
     escribirjson(out);
 
-    return 'Guardado completo';
+    return vect;
 };
 
-const escribirjson = (out) => {
+const escribirjson = async(out) => {
     let data = JSON.stringify(vect);
     fs.writeFile(`./modelo/${out}.json`, data, (err) => {
         if (err) throw new Error("No se pudo grabar", err);
