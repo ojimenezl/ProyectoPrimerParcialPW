@@ -8,6 +8,45 @@ let tareaPorHAcer = [];
 let vect = [];
 let todo = [];
 //publicar en la web
+
+const lecturacsv = async(file) => {
+    fs.createReadStream(file)
+        .on("error", (err) => console.log(err)) // Abrir archivo
+        .pipe(csv({ cast: true, delimiter: ',' }))
+        .on("data", (row) => {
+            for (let i = 4; i < 64; i++) {
+                if (row[i] == "" || row[i] == " " || row[i] == "") {
+                    row[i] = "0";
+                    //console.log(row[i]);
+                }
+            }
+            vector.push(row);
+        })
+        .on("end", () => {
+            // Y al finalizar, terminar lo necesario
+            //console.log(vector);
+            let data = JSON.stringify(vector);
+            fs.writeFileSync("modelo/data.json", data, (err) => {
+                if (err) throw new Error("No se pudo guarda la data", err);
+            });
+            //console.log("Se ha terminado de leer el archivo");
+        });
+    return 'Se ha terminado de leer el archivo';
+};
+
+let getR = async(file) => {
+    let doc = await lecturacsv(file);
+    return doc
+}
+const cargarDB = () => {
+    try {
+        tareaPorHAcer = require("../modelo/data.json");
+    } catch (error) {
+        tareaPorHAcer = [];
+    }
+
+};
+
 const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
@@ -33,24 +72,22 @@ const publicar = (file, country, year) => {
 
 };
 
-
-
-
 //guardar en json
-const guardar = (file, country, year, out) => {
-    lecturacsv(file);
+const guardar = async(file, country, year, out) => {
+    getR(file)
+
     cargarDB();
     let top = {
-        MediaxAnio: medxanio(year),
-        Menor_Mayor: media(country, year),
-        Menores: menores(country, year),
-        Mayores: mayores(country, year),
-        top5: topcinco(year),
+        MediaxAnio: medxanio(year).then(men => vec.push(men)).catch(err => err),
+        Menor_Mayor: media(country, year).then(men => men).catch(err => err),
+        Menores: menores(country, year).then(men => men).catch(err => err),
+        Mayores: mayores(country, year).then(men => men).catch(err => err),
+        top5: topcinco(year).then(men => men).catch(err => err)
     };
     vect.push(top);
     escribirjson(out);
-    //srv.escribir(top);
 
+    return 'Guardado completo';
 };
 
 const escribirjson = (out) => {
@@ -60,7 +97,7 @@ const escribirjson = (out) => {
     });
 };
 //Wendy Juma
-const medxanio = (year) => {
+const medxanio = async(year) => {
     let acum = 0;
     let tam = tareaPorHAcer.length - 4;
     vec = []
@@ -82,7 +119,7 @@ const medxanio = (year) => {
     return vec;
 };
 //Nicolas Carrasco
-const topcinco = (year) => {
+const topcinco = async(year) => {
     let vec = [];
     year = (year % 1960) + 4;
     for (let i = 4; i < tareaPorHAcer.length; i++) {
@@ -103,7 +140,7 @@ const topcinco = (year) => {
     return vec;
 };
 //Oscar Jiménez
-const menores = (country, year) => {
+const menores = async(country, year) => {
     // cargarDB()
     var sub = 0;
     var top = [];
@@ -173,7 +210,7 @@ const menores = (country, year) => {
 };
 
 //Eduardo Quisupangui
-const mayores = (country, year) => {
+const mayores = async(country, year) => {
     // cargarDB()
     var sub = 0;
     var top = [];
@@ -246,7 +283,7 @@ const mayores = (country, year) => {
 };
 
 //Kevin Ramirez
-const media = (pais, anio) => {
+const media = async(pais, anio) => {
     // cargarDB();
     for (var i = 4; i < tareaPorHAcer.length; i++) {
         if (tareaPorHAcer[i][1] === pais) {
@@ -297,36 +334,8 @@ const media = (pais, anio) => {
     return vec;
 };
 
-const lecturacsv = (file) => {
-    fs.createReadStream(file)
-        .on("error", (err) => console.log(err)) // Abrir archivo
-        .pipe(csv({ cast: true }))
-        .on("data", (row) => {
-            for (let i = 4; i < 64; i++) {
-                if (row[i] == "" || row[i] == " " || row[i] == "") {
-                    row[i] = "0";
-                }
-            }
-            vector.push(row);
-        })
-        .on("end", () => {
-            // Y al finalizar, terminar lo necesario
-            //console.log(vector);
-            let data = JSON.stringify(vector);
-            fs.writeFileSync("modelo/data.json", data, (err) => {
-                if (err) throw new Error("No se pudo guarda la data", err);
-            });
-            //console.log("Se ha terminado de leer el archivo");
-        });
-};
 
-const cargarDB = () => {
-    try {
-        tareaPorHAcer = require("../modelo/data.json");
-    } catch (error) {
-        tareaPorHAcer = [];
-    }
-};
+
 module.exports = {
     guardar,
     publicar,

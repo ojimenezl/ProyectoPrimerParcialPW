@@ -7,7 +7,7 @@ switch (comando) {
         control.publicar(argv.file, argv.country, argv.year)
         break;
     case 'guardar':
-        control.guardar(argv.file, argv.country, argv.year, argv.out)
+        control.guardar(argv.file, argv.country, argv.year, argv.out).then(men => console.log(men));
         break;
     default:
         console.log('Comando no reconocido');
