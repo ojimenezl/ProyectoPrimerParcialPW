@@ -1,6 +1,5 @@
 const argv = require('./config/yargs').argv;
 const control = require('./controlador/control')
-const colors = require('colors');
 let comando = argv._[0];
 //Oscar
 switch (comando) {

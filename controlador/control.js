@@ -1,8 +1,8 @@
 const colors = require("colors");
 const fs = require("fs"); // filesystem
 const csv = require("csv-parser"); // Encargado de parsear
-const srv = require("../vista/servidor.js");
-//const pag = require("../config/lista");
+const srv = require("../vista/servidor");
+//const pag = require("./config/lista");
 let vector = [];
 let tareaPorHAcer = [];
 let vect = [];
@@ -24,8 +24,8 @@ const publicar = (file, country, year) => {
         Mayores: mayores(country, year),
         top5: topcinco(year),
     };
-
-    srv.escribir(todo);
+    srv.escribir(top, year, country);
+    //srv.escribir(todo);
     // return todo;
     //pag.escrib(todo);
     //pag.list()
@@ -50,26 +50,6 @@ const guardar = (file, country, year, out) => {
     vect.push(top);
     escribirjson(out);
     //srv.escribir(top);
-
-};
-
-const pag = (file, country, year) => {
-
-    cargarDB();
-
-    let top = {
-        MediaxAnio: medxanio(year),
-        Menor_Mayor: media(country, year),
-        Menores: menores(country, year),
-        Mayores: mayores(country, year),
-        top5: topcinco(year),
-    };
-
-    //srv.escribir(todo);
-    return top;
-    //pag.escrib(todo);
-    //pag.list()
-
 
 };
 
@@ -350,6 +330,4 @@ const cargarDB = () => {
 module.exports = {
     guardar,
     publicar,
-    pag
-
 };
