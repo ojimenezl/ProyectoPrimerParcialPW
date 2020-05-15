@@ -9,7 +9,7 @@ const hostname = '127.0.0.1';
 const port = 3000;
 const router = express.Router()
 
-const escribir = (vector, y, c) => {
+const escribir = (vector) => {
     app.set('port', process.env.PORT || 3000);
 
     app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +27,7 @@ const escribir = (vector, y, c) => {
         //const top = imprimir.pag("./modelo/data.json", country, year)
         // console.log(top);
         let top = vector;
-        res.render('index', { top, y, c });
+        res.render('index', { top });
 
     });
 
