@@ -1,23 +1,41 @@
 const colors = require("colors");
 const fs = require("fs"); // filesystem
 const csv = require("csv-parser"); // Encargado de parsear
-const srv = require("./servidor.js");
+const srv = require("../vista/servidor.js");
+//const pag = require("../config/lista");
 let vector = [];
 let tareaPorHAcer = [];
 let vect = [];
+let todo = [];
 //publicar en la web
 const publicar = (file, country, year) => {
     lecturacsv(file);
     cargarDB();
-    let todo = [];
+
     todo.push(medxanio(year));
     todo.push(media(country, year));
     todo.push(mayores(country, year));
     todo.push(menores(country, year));
     todo.push(topcinco(year));
+    let top = {
+        MediaxAño: medxanio(year),
+        Menor_Mayor: media(country, year),
+        Menores: menores(country, year),
+        Mayores: mayores(country, year),
+        top5: topcinco(year),
+    };
+
     srv.escribir(todo);
+    // return todo;
+    //pag.escrib(todo);
+    //pag.list()
+
 
 };
+
+
+
+
 //guardar en json
 const guardar = (file, country, year, out) => {
     lecturacsv(file);
@@ -31,6 +49,28 @@ const guardar = (file, country, year, out) => {
     };
     vect.push(top);
     escribirjson(out);
+    //srv.escribir(top);
+
+};
+
+const pag = (file, country, year) => {
+
+    cargarDB();
+
+    let top = {
+        MediaxAnio: medxanio(year),
+        Menor_Mayor: media(country, year),
+        Menores: menores(country, year),
+        Mayores: mayores(country, year),
+        top5: topcinco(year),
+    };
+
+    //srv.escribir(todo);
+    return top;
+    //pag.escrib(todo);
+    //pag.list()
+
+
 };
 
 const escribirjson = (out) => {
@@ -310,4 +350,6 @@ const cargarDB = () => {
 module.exports = {
     guardar,
     publicar,
+    pag
+
 };
