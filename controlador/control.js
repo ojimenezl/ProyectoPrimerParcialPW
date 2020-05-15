@@ -9,7 +9,7 @@ let vect = [];
 let todo = [];
 //publicar en la web
 const publicar = (file, country, year) => {
-    //lecturacsv(file);
+    lecturacsv(file);
     cargarDB();
 
     todo.push(medxanio(year));
@@ -38,7 +38,7 @@ const publicar = (file, country, year) => {
 
 //guardar en json
 const guardar = (file, country, year, out) => {
-    //lecturacsv(file);
+    lecturacsv(file);
     cargarDB();
     let top = {
         MediaxAnio: medxanio(year),
