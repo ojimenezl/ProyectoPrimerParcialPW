@@ -5,31 +5,25 @@ Suscripciones a telefonía celular móvil, publicadas por el Banco
 Mundial y publicar las estadísticas de un determinado país en un
 año específico.
 
-## Introducción.
+## Comenzando.
 
 Esta instrucción permitira ejecutar la aplicación del proyecto en funcionamiento, para propósito de pruebas.
 
-Mira _Deployment_ para conocer como desplegar el proyecto.
+- Instalar el proyecto por medio de: https://github.com/ojimenezl/ProyectoPrimerParcialPW.git
 
 ### Pre-requisitos 📋
 
-Que cosas necesitas para instalar el software y como instalarlas
+Para poder ejecutar la aplicación se requiere instalar el siguiente comando.
 
-Da un ejemplo
+- npm i
 
-### Instalación 🔧
+### Ayuda
 
-Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose
+Este comando nos despliega unas opciones de ayuda para poder ejecutar la aplicación.
 
-Dí cómo será ese paso
+- node app guardar -help
 
-Da un ejemplo
-
-Y repite
-
-hasta finalizar
-
-Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo
+- node app publicar -help
 
 ## Ejecutando las pruebas ⚙️
 
