@@ -27,13 +27,50 @@ Este comando nos despliega unas opciones de ayuda para poder ejecutar la aplicac
 
 ## Ejecutando las pruebas ⚙️
 
-Explica como ejecutar las pruebas automatizadas para este sistema
+Al ingresar a la siguiente página: https://datos.bancomundial.org/indicador/IT.CEL.SETS
+Esta nos indicara los años y paises disponibles para poder guiarse y hacer las consultas en nuestra aplicación.
+
+Ejecutar una prueba de guardar. (Ejemplo)
+
+- node app guardar -f ./modelo/API.csv -y 2017 -c KOR -o Hola
+
+Ejecutar una prueba de publicar. (Ejemplo)
+
+- node app publicar -f ./modelo/API.csv -y 2017 -c KOR
+
+Por medio de este link se dirigira a la página web: http://localhost:3000
 
 ### Analice las pruebas end-to-end 🔩
 
-Explica que verifican estas pruebas y por qué
+- La media de suscripciones de todos los países en el año
+  especificado.
+- • Establecer si el valor de las suscripciones del país
+  determinado, es mayor o menor a la media mundial.
+- Los cinco países por encima del valor de suscripciones del
+  país determinado.
 
-Da un ejemplo
+  LOS 5 PAISES CON MAYORES SUSCRIPCIONES QUE ECU
+  SU CONSULTA:
+  ECU - 2018 | 15772838
+
+TOP | AÑO | PAISES | SUSCRIPCIONES
+1 | 2018 | SEN | 16559942
+2 | 2018 | SYR | 17129676
+3 | 2018 | CMR | 18455836
+4 | 2018 | BFA | 19339109
+5 | 2018 | KHM | 19417123
+
+- Los cinco países por debajo del valor de suscripciones del
+  país determinado.
+- El top cinco de países para el año especificado.
+
+TOP DE LOS 5 PAISES POR AÑO 2018
+CODIGO | VALOR
+WLD | 7858266808
+IBT | 6400236446
+LMY | 6316274525
+MIC | 5970863639
+IBD | 5194063717
 
 ### Y las pruebas de estilo de codificación ⌨️
 
