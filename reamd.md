@@ -51,13 +51,19 @@ Por medio de este link se dirigira a la página web: http://localhost:3000
 
   LOS 5 PAISES CON MAYORES SUSCRIPCIONES QUE ECU
   SU CONSULTA:
+
   ECU - 2018 | 15772838
 
 TOP | AÑO | PAISES | SUSCRIPCIONES
+
 1 | 2018 | SEN | 16559942
+
 2 | 2018 | SYR | 17129676
+
 3 | 2018 | CMR | 18455836
+
 4 | 2018 | BFA | 19339109
+
 5 | 2018 | KHM | 19417123
 
 - Los cinco países por debajo del valor de suscripciones del
