@@ -5,19 +5,6 @@ Suscripciones a telefonía celular móvil, publicadas por el Banco
 Mundial y publicar las estadísticas de un determinado país en un
 año específico.
 
-```html
-<p style="color:red">This is some red text.</p>
-```
-
-```diff
-+ this will be highlighted in green
-- this will be highlighted in red
-```
-
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `Holaaaaaaaaa`
-- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
-- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
-
 ## Comenzando.
 
 Esta instrucción permitira ejecutar la aplicación del proyecto en funcionamiento, para propósito de pruebas.
@@ -28,7 +15,9 @@ Esta instrucción permitira ejecutar la aplicación del proyecto en funcionamien
 
 Para poder ejecutar la aplicación se requiere instalar el siguiente comando.
 
-- npm i
+```html
+npm i
+```
 
 ### Ayuda
 
