@@ -1,5 +1,13 @@
 ## Suscripciones a telefonía celular móvil.
 
+color = incluir("colores")
+imprimirf("Hola en verde: "..color.verde.."hola"..color.reset.."\n") // imprimimos 'hola' en color verde y reseteamos el color.
+imprimirf("Color azul con formato: "..color.simp("im.azul").."hola"..color.reset.."\n") // imprimimos 'hola' con formato, eligiendo i: italicas y m: marcado
+imprimirf("Tabla de colores:\n")
+color.colores() // imprime la tabla de colores
+imprimirf("Violeta con formato: " ..color.simp("im.128").."hola"..color.reset.."\n") // imprimimos texto violeta, el color/número '128' lo tomamos de la tabla de colores, argumentos: 'm': marcado, 'i': italicas
+imprimirf("Violeta normal: "..color.color(128).."hola"..color.reset.."\n") // imprimimos el color violeta '128' de la tabla de colores
+
 Crear una aplicación en NodeJS que permita leer los datos de las
 Suscripciones a telefonía celular móvil, publicadas por el Banco
 Mundial y publicar las estadísticas de un determinado país en un
