@@ -9,6 +9,11 @@ año específico.
 <p style="color:red">This is some red text.</p>
 ```
 
+```diff
++ this will be highlighted in green
+- this will be highlighted in red
+```
+
 ## Comenzando.
 
 Esta instrucción permitira ejecutar la aplicación del proyecto en funcionamiento, para propósito de pruebas.
