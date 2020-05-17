@@ -6,7 +6,7 @@ Mundial y publicar las estadísticas de un determinado país en un
 año específico.
 
 ```html
-<h1 style="color:#FF0000">Cabecera 1</h1>
+<div style="background-color:#FFFF00">Mi Capa</div>
 ```
 
 ## Comenzando.
