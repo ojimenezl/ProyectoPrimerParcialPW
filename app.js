@@ -13,3 +13,9 @@ switch (comando) {
         console.log('Comando no reconocido');
 }
 //linea de cometario para ver
+// for (let tarea of lista) {
+//     //console.log(tarea.des);
+//     if (tarea.completado != argv.lista) {
+//         console.log(`Descripcion: ${tarea.des}\nCompletado: ${tarea.completado}\n`);
+//     }
+// }
