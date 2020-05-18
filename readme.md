@@ -19,7 +19,7 @@ Para poder ejecutar la aplicación se requiere instalar el siguiente comando.
 npm i
 ```
 
-### Ayuda
+### Ayuda.
 
 Este comando nos despliega unas opciones de ayuda para poder ejecutar la aplicación.
 
