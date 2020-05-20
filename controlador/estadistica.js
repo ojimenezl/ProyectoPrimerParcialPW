@@ -42,6 +42,9 @@ let getE = async(file, country, year) => {
 }
 
 const validar = async(country, year) => {
+    if (!Number(year)) {
+        throw new Error(`año ${year} invalido`)
+    }
     let i = 0;
     if (year < 1960 || year > 2019)
         throw new Error('Año no Encontrado')
