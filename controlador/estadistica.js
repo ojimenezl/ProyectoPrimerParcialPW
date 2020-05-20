@@ -23,11 +23,11 @@ const lecturacsv = async(file) => {
 
 
 let getE = async(file, country, year) => {
-    console.log("Entro");
+
+
     let doc = await lecturacsv(file);
     console.log(doc);
-    console.log("empieza hacer estadistica");
-    //console.log(tareaPorHAcer);
+    let val = await validar(country, year);
 
     let est = {
         MediaxAnio: await medxanio(year),
@@ -38,6 +38,19 @@ let getE = async(file, country, year) => {
     };
 
     return est;
+
+}
+
+const validar = async(country, year) => {
+    let i = 0;
+    if (year < 1960 || year > 2019)
+        throw new Error('Año no Encontrado')
+    for (i = 4; i < tareaPorHAcer.length; i++) {
+        if (country === tareaPorHAcer[i][1]) { break; }
+    }
+    if (i == tareaPorHAcer.length)
+        throw new Error('Codigo de Pais no encontrado')
+
 }
 
 //Wendy Juma

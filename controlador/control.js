@@ -7,12 +7,12 @@ let tareaPorHAcer = [];
 
 //publicar en la web
 const publicar = (file, country, year) => {
-    est.getE(file, country, year).then(v => srv.escribir(v));
+    est.getE(file, country, year).then(v => srv.escribir(v)).catch(msg => console.log(msg.message));
 };
 
 //guardar en json
 const guardar = (file, country, year, out) => {
-    est.getE(file, country, year).then(v => escribirjson(out, v));
+    est.getE(file, country, year).then(v => escribirjson(out, v)).catch(msg => console.log(msg.message));
 };
 //Guardando en json
 const escribirjson = (out, vect) => {
